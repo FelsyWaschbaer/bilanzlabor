@@ -1,0 +1,163 @@
+<html xmlns:style="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="filterSideBar">
+    <h4>WIRKUNGSKATEGORIEN</h4>
+
+    <div>
+        <input type="checkbox" name="wk" value="gwp">
+        <label>GWP - Treibhauspotential</label>
+    </div>
+    <div>
+        <input type="checkbox" name="wk" value="odp">
+        <label>ODP - Ozonabbaupotential</label>
+    </div>
+    <div>
+        <input type="checkbox" name="wk" value="ap" checked>
+        <label>AP - Versauerungspotential</label>
+    </div>
+    <div>
+        <input type="checkbox" name="wk" value="penrt" checked>
+        <label>PENRT - n. em. Primärenergie</label>
+    </div>
+
+</div>
+
+<div id="mainContent">
+    <div id="chartContainer"></div>
+
+    <div id="legendeContainer">
+        <div class="legende">
+            <div class="legendeBox" style="background-color:lightblue;"></div>
+            Herstellung
+        </div>
+        <div class="legende">
+            <div class="legendeBox" style="background-color:orange;"></div>
+            Nutzung
+        </div>
+        <div class="legende">
+            <div class="legendeBox" style="background-color:grey;"></div>
+            Rückbau
+        </div>
+        <span>Bilanzierungszeitraum - 30 Jahre / Bezugsgröße - Gebäude</span>
+    </div>
+
+    <hr/>
+
+    <h4>STELLSCHRAUBEN</h4>
+    <!--<div class="range">
+        <figure>
+            <label for="energieStandard">Energiestandard</label>
+            <input id="energieStandard" type="range" min="0" max="2" step="1" style="width:300px;">
+            <ul class="range-labels" style="margin-left:100px">
+                <li>EnEV 2016
+                <li>KfW 70
+                <li>KfW 55
+            </ul>
+        </figure>-->
+
+    <div class="stellschraube">
+        <label class="label-stellschraube">Energiestandard</label>
+        <div class="radiogroup2">
+            <input type="radio" name="Standard1" value="EnEV'16" checked>
+            <input type="radio" name="Standard2" value="EnEV'16">
+            <label>EnEV 2016</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Standard1" value="KfW70">
+            <input type="radio" name="Standard2" value="KfW70">
+            <label>KfW 70</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Standard1" value="KfW55">
+            <input type="radio" name="Standard2" value="KfW55">
+            <label>KfW 55</label>
+        </div>
+    </div>
+
+    <div class="stellschraube">
+        <label class="label-stellschraube">TGA</label>
+        <div class="radiogroup2">
+            <input type="radio" name="TGA1" value="Gas" checked>
+            <input type="radio" name="TGA2" value="Gas">
+            <label>Gas</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="TGA1" value="WP">
+            <input type="radio" name="TGA2" value="WP">
+            <label>WP</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="TGA1" value="Pellets">
+            <input type="radio" name="TGA2" value="Pellets">
+            <label>Holz</label>
+        </div>
+    </div>
+
+    <div class="stellschraube">
+        <label class="label-stellschraube">Fenster</label>
+        <div class="radiogroup2">
+            <input type="radio" name="Fenster1" value="FB" checked>
+            <input type="radio" name="Fenster2" value="FB">
+            <label>Bestand</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Fenster1" value="2WSV">
+            <input type="radio" name="Fenster2" value="2WSV">
+            <label>2WSV</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Fenster1" value="3WSV">
+            <input type="radio" name="Fenster2" value="3WSV">
+            <label>3WSV</label>
+        </div>
+    </div>
+
+    <div class="stellschraube">
+        <label class="label-stellschraube">Wärmedämmung</label>
+        <div class="radiogroup2">
+            <input type="radio" name="Waermedaemmung1" value="EPS" checked>
+            <input type="radio" name="Waermedaemmung2" value="EPS">
+            <label>EPS</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Waermedaemmung1" value="Holz">
+            <input type="radio" name="Waermedaemmung2" value="Holz">
+            <label>Holz</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Waermedaemmung1" value="HF MW">
+            <input type="radio" name="Waermedaemmung2" value="HF MW">
+            <label>HF MW</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Waermedaemmung1" value="HF Holz">
+            <input type="radio" name="Waermedaemmung2" value="HF Holz">
+            <label>HF Holz</label>
+        </div>
+    </div>
+
+    <div class="stellschraube">
+        <label class="label-stellschraube">Wärmebrücken</label>
+        <div class="radiogroup2">
+            <input type="radio" name="Waermebruecken1" value="0.1" checked>
+            <input type="radio" name="Waermebruecken2" value="0.1">
+            <label>0.1</label>
+        </div>
+        <div class="radiogroup2">
+            <input type="radio" name="Waermebruecken1" value="0.05">
+            <input type="radio" name="Waermebruecken2" value="0.05">
+            <label>0.05</label>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+<script src="d3.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
