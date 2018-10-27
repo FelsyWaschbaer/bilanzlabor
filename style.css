@@ -10,6 +10,15 @@ h4 {
   margin-right: 20px;
 }
 
+#wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+#mainContent{
+  padding: 30px;
+}
+
 .legendeBox{
   width: 15px;
   height: 15px;
@@ -23,13 +32,10 @@ h4 {
   margin-top: 25px;
 }
 
-#mainContent{
-  margin-left: 20%;
-}
-
 #chartContainer{
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 }
 
 .radiogroup {
@@ -39,20 +45,28 @@ h4 {
 }
 
 .filterSideBar{
-  position: fixed;
   width: 20%;
-  height: 200px;
-  z-index: 1;
-  top: 0;
-  left:0;
-  overflow: hidden;
+  min-width: 250px;
+  background-color: white;
+  border-right-color: grey;
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+
+.filterBox{
+  margin: 10px auto;
+}
+
+.filterBox label{
+  width: 200px;
+  display: inline-block;
 }
 
 .radiogroup2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 10px;
+  margin: 20px 5px;
   width: 90px;
 }
 
@@ -61,13 +75,19 @@ h4 {
 }
 .label-stellschraube{
   display: block;
-  width: 150px;
+  width: 120px;
   padding-top: 35px;
+}
+
+#stellschraubenContainer{
+  display:flex;
+  flex-flow: row wrap;
 }
 
 .stellschraube{
   display: flex;
   flex-direction: row;
+  margin-right: 40px;
 }
 
 .radiogroup label {
@@ -105,27 +125,6 @@ li::before {
 
 a {
   color: #00B7FF;
-}
-
-.composer{
-  cursor: pointer;
-}
-
-.compositor text{
-  font-family: sans-serif;
-  font-weight: bold;
-  fill: black;
-}
-
-.legend rect{
-  fill: white;
-  stroke: aquamarine;
-  rx: 5px;
-  ry: 5px;
-}
-
-.legendItem{
-  cursor: pointer;
 }
 
 .tooltip{

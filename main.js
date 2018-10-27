@@ -1,11 +1,3 @@
-//define colours
-var colorMap = {
-    "Renaissance": "orchid",
-    "Barock": "salmon",
-    "Classic": "gold",
-    "Romantic": "lightgreen",
-    "Modern": "lightblue"
-};
 
 var rawData = null;
 var kategorien = {penrt:{title:"PENRT [TJ]"}, gwp:{title:"GWP [t CO2-Eq]"}, ap:{title:"AP [kg SO2-Eq]"}, odp:{title:"ODP [kg CFC11-Eq]"}};
@@ -21,7 +13,7 @@ client.addEventListener("load", function () {
         var columns = line.split(";");
         var name = columns[5];
         var variante = {name: name};
-        ;
+
         for (var i = 0; i <= 11; i = i + 3) {
             var herstellung = parseFloat(columns[i + 6]);
             var nutzung = parseFloat(columns[i + 7]);
@@ -90,7 +82,8 @@ function getPresentChartIds(){
 function onSelected(charts) {
     var key1 = getKey(1);
     charts.forEach(function(chart){
-        chart.update([resultMap[key1], resultMap["EnEV'16 As 3WSV_EPS_Gas_0.1"]])
+        var variante1 = resultMap[key1] != undefined ? resultMap[key1] : new Variante();
+        chart.update([variante1, resultMap["EnEV'16 As 3WSV_EPS_Gas_0.1"]])
     });
 }
 
@@ -106,6 +99,13 @@ function getWirkungskategorien() {
         }
     );
     return result;
+}
+
+function Variante(){
+    var self = this;
+    Object.keys(kategorien).forEach(function(kategorie){
+        self[kategorie] = {herstellung: 0, nutzung: 0, rueckbau: 0};
+    })
 }
 
 function getKey(value) {
@@ -129,10 +129,10 @@ function BarChart(data, containerId, kategorie, title) {
 
     var width = 250;
     var height = 300;
-    var marginLeft = 100;
+    var marginLeft = 90;
     var marginBottom = 20;
-    var barWidth = 30;
-    var barDistance = 5
+    var barWidth = 35;
+    var barDistance = 5;
 
     //create svg
     var svg = d3.select("#" + containerId).append("svg")
@@ -267,6 +267,19 @@ function BarChart(data, containerId, kategorie, title) {
             .style("fill", function (d) {
                 return "grey";
             });
+
+
+        svg.select("#zeroline").remove();
+
+        //create zero line
+        svg.append('line')
+            .attr("id", "zeroline")
+            .attr("stroke-width", 1)
+            .attr("stroke", "grey")
+            .attr('y1', scale(0))
+            .attr('y2', scale(0))
+            .attr('x1', marginLeft)
+            .attr('x2', width);
 
     };
 
@@ -418,86 +431,4 @@ function addTooltips(composers) {
             .duration(100)
             .style("opacity", 0)
     });
-}
-
-
-function Legende(svg, data, chart, chartHeight) {
-    var svg = svg;
-    var rawData = data;
-    var legend_height = 200;
-    var margin = 25;
-    var fontSize = 10;
-
-    var currentData = data;
-
-    var legend = svg.append("g")
-        .attr("class", "legend")
-        .attr("transform", "translate(" + (margin) + ", " + (chartHeight - legend_height - 3 * margin) + ")");
-
-    legend.append("rect")
-        .attr("width", 150)
-        .attr("height", legend_height)
-        .attr("rx", 5)
-        .attr("ry", 5);
-
-    var colorArray = [];
-    var activityMap = {};
-    for (var key in colorMap) {
-        activityMap[key] = true;
-        colorArray.push({key: key, color: colorMap[key]});
-    }
-    var legendItems = legend.selectAll(".legendItem")
-        .data(colorArray)
-        .enter()
-        .append("circle")
-        .attr("class", "legendItem")
-        .attr("cy", function (d, i) {
-            return i * 35 + margin
-        })
-        .attr("cx", margin)
-        .attr("r", 7)
-        .style("fill", function (d) {
-            return d.color
-        })
-
-        //add functionality
-        .on("click", function (d) {
-            var resultData = [];
-            if (activityMap[d.key]) {
-                activityMap[d.key] = false;
-                d3.select(this).style("stroke", d.color)
-                    .style("fill", "white");
-                currentData.forEach(function (composer) {
-                    if (composer.period != d.key) {
-                        resultData.push(composer);
-                    }
-                });
-            } else {
-                activityMap[d.key] = true;
-                d3.select(this).style("fill", d.color)
-                    .style("stroke", "white");
-                var resultData = currentData;
-                rawData.forEach(function (composer) {
-                    if (composer.period == d.key) {
-                        resultData.push(composer);
-                    }
-                });
-            }
-            currentData = resultData;
-            chart.update(resultData);
-        });
-
-    var legendTexts = legend.selectAll(".legendText")
-        .data(colorArray)
-        .enter()
-        .append("text")
-        .attr("class", "legendText")
-        .text(function (d) {
-            return d.key
-        })
-        .attr("y", function (d, i) {
-            return i * 35 + margin + fontSize / 2.0
-        })
-        .attr("x", 2 * margin)
-        .style("font-size", fontSize + "px")
 }
