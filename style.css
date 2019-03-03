@@ -39,6 +39,16 @@ h4 {
   justify-content: space-evenly;
 }
 
+.chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart img {
+  margin-left: 65px;
+}
+
 .radiogroup {
   display: inline-block;
   text-align: center;
@@ -75,7 +85,6 @@ h4 {
 .radiogroup2 label{
   padding: 7px;
   text-align: center;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
 .optionlabel{
@@ -144,10 +153,21 @@ a {
   border-style: solid;
   border-color: grey;
   border-radius: 5px;
+  border-width: 2px;
   text-align: left;
   padding: 7px 7px;
   position: absolute;
   pointer-events: none;
+  min-width: 140px;
+}
+
+.tooltip_value{
+  float:right;
+  margin-left: 20px;
+}
+
+.target {
+  font-weight:bold;
 }
 
 /* Customize the label (the container) */
@@ -178,8 +198,8 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
   background-color: #eee;
   border-radius: 50%;
 }
@@ -191,7 +211,7 @@ a {
 
 /* When the radio button is checked, add a blue background */
 .radiocontainer input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: blueviolet;
 }
 
 .radiocontainer input:checked ~ .checkmark.alternative {
@@ -291,4 +311,21 @@ a {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.rect_herstellung, .rect_nutzung, .rect_rueckbau {
+  cursor: pointer;
+}
+
+.rect_nutzung:hover, .rect_herstellung:hover, .rect_rueckbau:hover {
+  stroke: black;
+}
+
+.charttitle {
+  font-weight:bold;
+  font-size: 23px;
+  width: 200px;
+  text-align: center;
+  margin-left: 65px;
+  font-style: italic;
 }

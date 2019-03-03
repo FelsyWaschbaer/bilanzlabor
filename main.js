@@ -1,9 +1,9 @@
 var rawData = null;
 var kategorien = {
-    penrt: {title: "PENRT [TJ]"},
-    gwp: {title: "GWP [t CO2-Eq]"},
-    ap: {title: "AP [kg SO2-Eq]"},
-    odp: {title: "ODP [kg CFC11-Eq]"}
+    penrt: {title: "PENRT", unit: "TJ"},
+    gwp: {title: "GWP", unit: "t CO2-Eq"},
+    ap: {title: "AP", unit: "kg SO2-Eq"},
+    odp: {title: "ODP", unit:"kg CFC11-Eq"}
 };
 var stellschrauben = {
     energiestandard: {options: ["EnEV'16", "KfW70", "KfW55"]},
@@ -12,6 +12,10 @@ var stellschrauben = {
     waermedaemmung: {options: ["EPS", "Holz", "HFMW"]},
     waermebruecken: {options: ["0.1", "0.05"]}
 };
+
+var colors = ["lightblue", "red"];
+
+var format = function(value){return d3.format(",")(value).replace(/,/g, ' ').replace(/\./, ',')}
 
 
 
@@ -71,8 +75,6 @@ client.addEventListener("load", function () {
     if(remainingAsyncCalls == 0){
         showDiagramms();
     }
-    // printMissingVariants(resultMap);
-    // onWirkungskategorienChanged();
 });
 
 client2.addEventListener("load", function() {
@@ -89,7 +91,6 @@ client2.addEventListener("load", function() {
         var p3_gwp = {x: 2047, y: parseFloat(columns[6])};
         lineChartMap[name] = {name: name, penrt: [p1_penrt, p2_penrt, p3_penrt], gwp: [p1_gwp, p2_gwp, p3_gwp]};
     });
-    console.log(lineChartMap);
     var data = [];
     Object.keys(lineChartMap).forEach(function(key) {
        data.push(lineChartMap[key]);
@@ -100,10 +101,6 @@ client2.addEventListener("load", function() {
     container.setAttribute("id", id);
     container.setAttribute("class", "chart");
     chartContainer.appendChild(container);
-    var key1 = getKey(1);
-    var key2 = getKey(2);
-    var variante1 = resultMap[key1] != undefined ? resultMap[key1] : new Variante2();
-    var variante2 = resultMap[key2] != undefined ? resultMap[key2] : new Variante2();
     remainingAsyncCalls--;
     if(remainingAsyncCalls == 0){
         showDiagramms();
@@ -127,6 +124,22 @@ function onChartTypeChanged() {
     var chartType = getChartType();
     var opacity = chartType == "barchart" ? 1 : 0;
     document.getElementById("legendeContainer").style.opacity = opacity;
+    if(chartType !== "barchart") {
+        document.querySelectorAll('input[name="wk"]').forEach(
+            function (wk){
+                if(wk.value !== "gwp" && wk.value !== "penrt") {
+                    wk.checked = false;
+                    wk.disabled = true;
+                }
+            }
+        );
+    }else {
+        document.querySelectorAll('input[name="wk"]').forEach(
+            function (wk){
+                wk.disabled = false;
+            }
+        );
+    }
     onWirkungskategorienChanged();
 }
 
@@ -141,7 +154,6 @@ function onWirkungskategorienChanged() {
     var variante2 = dataSource[key2] != undefined ? dataSource[key2] : defaultVariante;
     var chartContainer = document.getElementById("chartContainer");
     var chartIds = getPresentChartIds();
-    console.log(chartIds);
     var charts = [];
     wks.forEach(function (wk, index) {
         if (!(chartIds.includes("chart" + wk))) {
@@ -151,7 +163,7 @@ function onWirkungskategorienChanged() {
             container.setAttribute("class", "chart");
             chartContainer.appendChild(container);
             if(chartType == "barchart"){
-                charts.push(new BarChart([variante1, variante2], id, wk, kategorien[wk].title));
+                charts.push(new BarChart([variante1, variante2], id, wk, kategorien[wk].title, kategorien[wk].unit));
             }else{
                 charts.push(new LineChart([variante1, variante2], id, wk, kategorien[wk].title));
             }
@@ -165,7 +177,6 @@ function onWirkungskategorienChanged() {
         var element = document.getElementById(id);
         element.parentNode.removeChild(element);
     });
-    console.log("DE: " + deletedElements);
     document.querySelectorAll('.radiogroup2 input').forEach(
         function (radiobutton) {
             radiobutton.addEventListener("click", function () {
@@ -194,7 +205,7 @@ function onSelected(charts) {
     var variante1 = dataSource[key1] != undefined ? dataSource[key1] : defaultVariante;
     var variante2 = dataSource[key2] != undefined ? dataSource[key2] : defaultVariante;
     charts.forEach(function (chart) {
-        chart.update([variante1, variante2]);
+        chart.update([variante1, variante2], "all");
     });
 }
 
@@ -235,7 +246,7 @@ function getKey(value) {
     var waermedaemmung = getRadioValue("Waermedaemmung" + value);
     var waermebruecken = getRadioValue("Waermebruecken" + value);
     if (standard !== "EnEV'16" && fenster !== "3WSV") {
-        showInfo("Der Energiestandard ist nur mit dreifach verglasten Fenstern zu erreichen");
+        showInfo("Der Energiestandard ist nur mit mehrfach verglasten Fenstern zu erreichen", colors[value-1]);
     }
     return [standard, fenster, waermedaemmung, tga, waermebruecken].join("_");
 }
@@ -248,7 +259,7 @@ function negF(value) {
     return value < 0 ? value : 0;
 }
 
-function BarChart(data, containerId, kategorie, title) {
+function BarChart(data, containerId, kategorie, title, unit) {
 
     var width = 250;
     var height = 300;
@@ -258,6 +269,16 @@ function BarChart(data, containerId, kategorie, title) {
     var barWidth = 45;
     var barDistance = 10;
 
+    /*var img = document.createElement("img");
+    img.setAttribute("src", kategorie + ".png");
+    img.setAttribute("style", "width:50px;");
+    document.getElementById(containerId).appendChild(img);*/
+
+    var charTitle = document.createElement("span");
+    charTitle.setAttribute("class", "charttitle");
+    charTitle.innerHTML = title;
+    document.getElementById(containerId).appendChild(charTitle);
+
     //create svg
     var svg = d3.select("#" + containerId).append("svg")
         .attr("width", width)
@@ -266,9 +287,9 @@ function BarChart(data, containerId, kategorie, title) {
     //add axis
     svg.append("g")
         .attr("transform", "translate(" + marginLeft + ", " + 0 + ")")
-        .attr("id", "axis" + containerId);
+        .attr("id", "axis" + containerId).style("font-size", "13px");
 
-    svg.append("text").text(title).attr("transform", "translate(" + (marginLeft + barDistance) + ", 10)");
+    svg.append("text").text("[" + unit + "]").attr("transform", "translate(" + (width-20) + ", 80) rotate(90)");
 
     svg.append("circle")
         .attr("r", 5)
@@ -281,11 +302,22 @@ function BarChart(data, containerId, kategorie, title) {
         .attr("cx", marginLeft + barMarginLeft + barDistance + 1.5 * barWidth)
         .attr("cy", height - 10);
 
-    this.update = function update(data) {
-        //data = [{kategorie:{herstellung: 10000000, nutzung:-10000000, rueckbau: -5000000}}, data[1]];;
+    this.update = function update(data, cyclePhase) {
+
+        var workingData = [];
+        data.forEach(function(variante) {
+            var herstellung = cyclePhase == "herstellung" || cyclePhase == "all" ? variante[kategorie].herstellung : 0;
+            var nutzung = cyclePhase == "nutzung" || cyclePhase == "all" ? variante[kategorie].nutzung : 0;
+            var rueckbau = cyclePhase == "rueckbau" || cyclePhase == "all" ? variante[kategorie].rueckbau : 0;
+            var obj = {};
+            obj[kategorie] = {herstellung: herstellung, nutzung: nutzung, rueckbau: rueckbau};
+            workingData.push(obj);
+        });
+
+        // get Scale dimensions
         var max_Value = 0;
         var min_Value = 0;
-        data.forEach(function (variante) {
+        workingData.forEach(function (variante) {
             var herstellung = variante[kategorie].herstellung;
             var nutzung = variante[kategorie].nutzung;
             var rueckbau = variante[kategorie].rueckbau;
@@ -296,17 +328,16 @@ function BarChart(data, containerId, kategorie, title) {
                 min_Value = negF(herstellung) + negF(nutzung) + negF(rueckbau);
             }
         });
-
         var scale = d3.scaleLinear().domain([min_Value, max_Value]).range([height - marginBottom, 20]);
 
         //create axis and set tick-format
-        var axis = d3.axisLeft(scale).ticks(5);
+        var axis = d3.axisLeft(scale).ticks(5).tickFormat(format);
 
         d3.select("#axis" + containerId).call(axis);
 
         //bind data
         var varianten = svg.selectAll(".variante")
-            .data(data, function (d) {
+            .data(workingData, function (d) {
                 return d.name
             });
 
@@ -325,7 +356,7 @@ function BarChart(data, containerId, kategorie, title) {
 
         new_varianten.append("rect").attr("class", "rect_herstellung");
         new_varianten.append("rect").attr("class", "rect_nutzung");
-        new_varianten.append("rect").attr("class", "rect_rueckbau");
+        new_varianten.append("rect").attr("class", "rect_rueckbau").on("click",function(){update(data, "rueckbau")});;
 
         //update (all)
         //--------------------------------------------------------------------
@@ -335,7 +366,6 @@ function BarChart(data, containerId, kategorie, title) {
             } else {
                 return scale(value) - scale(0) + scale(Math.abs(value));
             }
-
         }
 
         new_varianten.merge(varianten).select(".rect_herstellung")
@@ -350,7 +380,8 @@ function BarChart(data, containerId, kategorie, title) {
             })
             .attr("height", function (d) {
                 return scale(0) - scale(Math.abs(d[kategorie].herstellung))
-            });
+            }).on("click",cyclePhase == "herstellung" ? function(){update(data, "all")} : function(){update(data, "herstellung")});
+
 
         new_varianten.merge(varianten).select(".rect_nutzung")
             .attr("width", barWidth)
@@ -373,7 +404,7 @@ function BarChart(data, containerId, kategorie, title) {
             })
             .attr("height", function (d) {
                 return scale(0) - scale(Math.abs(d[kategorie].nutzung))
-            });
+            }).on("click",cyclePhase == "nutzung" ? function(){update(data, "all")} : function(){update(data, "nutzung")});
 
         new_varianten.merge(varianten).select(".rect_rueckbau")
             .attr("width", barWidth)
@@ -399,7 +430,7 @@ function BarChart(data, containerId, kategorie, title) {
             })
             .style("fill", function (d) {
                 return "grey";
-            });
+            }).on("click",cyclePhase == "rueckbau" ? function(){update(data, "all")} : function(){update(data, "rueckbau")});
 
 
         svg.select("#zeroline").remove();
@@ -417,7 +448,19 @@ function BarChart(data, containerId, kategorie, title) {
         addTooltips(d3.selectAll(".variante"))
     };
 
-    this.update(data);
+    this.update(data, "all");
+}
+
+function setTooltipContent(div, data, event) {
+    var herstellung = data.herstellung;
+    var nutzung = data.nutzung;
+    var rueckbau = data.rueckbau;
+    var target = event.originalTarget.attributes.class.value;
+    div.html(
+        "<span class='" + (target == "rect_herstellung" ? "target" : target) + "'><span>Herstellung:</span><span class='tooltip_value'>" + format(data.herstellung) + "</span></span></br>" +
+        "<span class='" + (target == "rect_nutzung" ? "target" : target) + "'><span>Nutzung:</span><span class='tooltip_value'" + ">" + format(data.nutzung) + "</span></span></br>" +
+        "<span class='" + (target == "rect_rueckbau" ? "target" : target) + "'><span>Rückbau:</span><span class='tooltip_value'>" + format(data.rueckbau) + "</span></span><hr>" +
+        "<span><span>Gesamt:</span><span class='tooltip_value'>" + format(herstellung + nutzung + rueckbau) + "</span></span>")
 }
 
 function addTooltips(varianten) {
@@ -431,25 +474,18 @@ function addTooltips(varianten) {
             .style("opacity", 0);
     }
 
-    var body_padding = parseFloat(d3.select("body").style("padding-left"));
-
-    varianten.on("mouseover", function (d, index, array) {
-        var herstellung = d[this.attributes.kategorie.nodeValue].herstellung;
-        var nutzung = d[this.attributes.kategorie.nodeValue].nutzung;
-        var rueckbau = d[this.attributes.kategorie.nodeValue].rueckbau;
-        div.html("Herstellung:" + d[this.attributes.kategorie.nodeValue].herstellung + "</br>" +
-            "Nutzung:" + d[this.attributes.kategorie.nodeValue].nutzung + "</br>" +
-            "Rückbau:" + d[this.attributes.kategorie.nodeValue].rueckbau + "<hr>" +
-            "Gesamt:" + (herstellung + nutzung + rueckbau))
-            .style("left", d3.event.pageX + "px")
-            .style("top", d3.event.pageY + "px");
+    varianten.on("mouseover", function (d) {
+        setTooltipContent(div, d[this.attributes.kategorie.nodeValue], d3.event);
+        setTooltipPosition(div, d3.event);
         //make tooltip appear
         div.transition()
             .duration(300)
             .style("opacity", 1);
 
     varianten.on("mousemove", function(d){
-        div.style("left", d3.event.pageX + "px").style("top", d3.event.pageY + "px");
+        setTooltipContent(div, d[this.attributes.kategorie.nodeValue], d3.event);
+        setTooltipPosition(div, d3.event);
+        div.style("opacity", 1);
     });
 
     }).on("mouseout", function (d) {
@@ -460,14 +496,22 @@ function addTooltips(varianten) {
     });
 }
 
+function setTooltipPosition(div, event) {
+    div.style("left", event.pageX + 10 + "px").style("top", event.pageY + 10 + "px");
+}
+
 function LineChart(data, containerId, kategorie, title) {
     var width = 500;
     var height = 300;
     var marginLeft = 90;
     var marginBottom = 20;
-    var barMarginLeft = 20;
     var barWidth = 45;
     var barDistance = 10;
+
+    var charTitle = document.createElement("span");
+    charTitle.setAttribute("class", "charttitle");
+    charTitle.innerHTML = title;
+    document.getElementById(containerId).appendChild(charTitle);
 
     //create svg
     var svg = d3.select("#" + containerId).append("svg")
@@ -477,14 +521,11 @@ function LineChart(data, containerId, kategorie, title) {
     //add axis
     svg.append("g")
         .attr("transform", "translate(" + marginLeft + ", " + 0 + ")")
-        .attr("id", "yAxis" + containerId);
+        .attr("id", "yAxis" + containerId).style("font-size", "13px");;
 
     svg.append("g")
         .attr("transform", "translate(0, " + (height - marginBottom) + ")")
         .attr("id", "xAxis" + containerId);
-
-
-    svg.append("text").text(title).attr("transform", "translate(" + (marginLeft) + ",10)");
 
     this.update = function update(data) {
 
@@ -501,11 +542,12 @@ function LineChart(data, containerId, kategorie, title) {
         var yScale = d3.scaleLinear().domain([0, max_Value]).range([height - marginBottom, 20]);
 
         //create axis and set tick-format
-        var yAxis = d3.axisLeft(yScale);
+        var yAxis = d3.axisLeft(yScale).tickFormat(format);
         d3.select("#yAxis" + containerId).call(yAxis);
 
-        var xScale = d3.scaleLinear().domain([2017, 2047]).range([marginLeft, width]);
+        var xScale = d3.scaleLinear().domain([2017, 2047]).range([marginLeft, width-5]);
 
+        svg.selectAll(".lineChartPoint").remove();
         //create axis and set tick-format
         var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
         d3.select("#xAxis" + containerId).call(xAxis);
@@ -529,31 +571,76 @@ function LineChart(data, containerId, kategorie, title) {
             .attr("class", "variante")
             .attr("kategorie", kategorie);
 
-
         new_varianten.append("path").attr("class", "verlauf");
 
         var line = d3.line()
             .x(function(d) { return xScale(d['x']); })
             .y(function(d) { return yScale(d['y']); });
 
-        colors = ["lightblue", "red"];
-
         new_varianten.merge(varianten).select(".verlauf")
-            .attr("d", function(d) { return line(d[kategorie]); })
+            .attr("d", function(d,i) {
+                var parent = d3.select(this.parentNode);
+                d[kategorie].forEach(function(p){
+                    parent.append("circle")
+                        .attr("class","lineChartPoint")
+                        .attr("jahr", p['x'])
+                        .attr("wert", p['y'])
+                        .attr("cx", xScale(p['x']))
+                        .attr("cy", yScale(p['y'])).attr("r",3)
+                        .attr("fill", colors[i])
+                });
+                return line(d[kategorie]); })
             .attr("fill", "none")
             .attr("stroke", function(d,i){ return colors[i]})
             .attr("stroke-width", 3);
 
-        console.log(xScale(2017));
+        addLineChartTooltips(d3.selectAll(".lineChartPoint"))
+
     };
     this.update(data);
 
 }
 
-function showInfo(text) {
+function addLineChartTooltips(points) {
+
+    var div = d3.select("body .tooltip");
+
+    //add tooltip (one for all)
+    if (div.empty()) {
+        div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+    }
+
+    var body_padding = parseFloat(d3.select("body").style("padding-left"));
+
+    points.on("mouseover", function (d, index, array) {
+        div.html("Jahr:" + array[index].attributes.jahr.value + "</br>" +
+            "Wert:" + format(Math.round(array[index].attributes.wert.value)))
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px");
+        //make tooltip appear
+        div.transition()
+            .duration(300)
+            .style("opacity", 1);
+
+        varianten.on("mousemove", function(d){
+            div.style("left", d3.event.pageX + 10 + "px").style("top", d3.event.pageY + 10 + "px");
+        });
+
+    }).on("mouseout", function (d) {
+        //make tooltip disappear
+        div.transition()
+            .duration(300)
+            .style("opacity", 0)
+    });
+}
+
+function showInfo(text,color) {
     var info = document.getElementById("info");
     info.innerHTML = text;
     info.style.visibility = "visible";
+    info.style.backgroundColor = color;
     setTimeout(function () {
         info.style.visibility = "hidden"
     }, 2000);
