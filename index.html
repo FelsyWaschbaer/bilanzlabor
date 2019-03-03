@@ -5,6 +5,10 @@
 </head>
 <body>
 
+<div id="infocontainer">
+    <div id="info"></div>
+</div>
+
 <div id="wrapper">
 
     <div class="filterSideBar">
@@ -12,25 +16,38 @@
 
         <div class="filterBox">
             <label>GWP - Treibhauspotential</label>
-            <input type="checkbox" name="wk" value="gwp">
-        </div>
-        <div class="filterBox">
-            <label>ODP - Ozonabbaupotential</label>
-            <input type="checkbox" name="wk" value="odp">
-        </div>
-        <div class="filterBox">
-            <label>AP - Versauerungspotential</label>
-            <input type="checkbox" name="wk" value="ap" checked>
+            <input type="checkbox" name="wk" value="gwp" checked>
         </div>
         <div class="filterBox">
             <label>PENRT - n. em. Primärenergie</label>
             <input type="checkbox" name="wk" value="penrt" checked>
         </div>
+        <div class="filterBox">
+            <label>AP - Versauerungspotential</label>
+            <input type="checkbox" name="wk" value="ap">
+        </div>
+        <div class="filterBox">
+            <label>ODP - Ozonabbaupotential</label>
+            <input type="checkbox" name="wk" value="odp">
+        </div>
+
+        <h4>Diagrammtyp</h4>
+
+        <div class="filterBox">
+            <label>Balken</label>
+            <input type="radio" name="charttype" value="barchart" checked>
+        </div>
+
+        <div class="filterBox">
+            <label>Linien</label>
+            <input type="radio" name="charttype" value="linechart">
+        </div>
+
 
     </div>
 
     <div id="mainContent">
-        <div id="chartContainer"></div>
+        <div id="chartContainer"> <div id="loader"><div id="spinner"></div> </div></div>
 
         <div id="legendeContainer">
             <div class="legende">
@@ -71,10 +88,13 @@
                         <span class="checkmark"></span>
                     </label>
                     <label class="radiocontainer">
-                        <input type="radio" name="Standard2" value="EnEV'16">
+                        <input type="radio" name="Standard2" value="EnEV'16" checked>
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>EnEV 2016</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">EnEV 2016</span>
+                        <span class="optiontooltip">Energieeinsparverordnung 2016</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -85,7 +105,10 @@
                         <input type="radio" name="Standard2" value="KfW70">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>KfW 70</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">KfW 70</span>
+                        <span class="optiontooltip">test</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -96,7 +119,10 @@
                         <input type="radio" name="Standard2" value="KfW55">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>KfW 55</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">KfW 55</span>
+                        <span class="optiontooltip">test</span>
+                    </div>
                 </div>
             </div>
 
@@ -108,10 +134,13 @@
                         <span class="checkmark"></span>
                     </label>
                     <label class="radiocontainer">
-                        <input type="radio" name="TGA2" value="Gas">
+                        <input type="radio" name="TGA2" value="Gas" checked>
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>Gas</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">Gas</span>
+                        <span class="optiontooltip">Gasbrennwertkessel und neue Radiatoren</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -122,7 +151,10 @@
                         <input type="radio" name="TGA2" value="WP">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>WP</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">WP</span>
+                        <span class="optiontooltip">Wärmepumpe Luft/Wasser und Fußbodenheizung</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -133,7 +165,10 @@
                         <input type="radio" name="TGA2" value="Pellets">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>Holz</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">Holz</span>
+                        <span class="optiontooltip">Pelletkessel und neue Radiatoren</span>
+                    </div>
                 </div>
             </div>
 
@@ -145,10 +180,13 @@
                         <span class="checkmark"></span>
                     </label>
                     <label class="radiocontainer">
-                        <input type="radio" name="Fenster2" value="FB">
+                        <input type="radio" name="Fenster2" value="FB" checked>
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>Bestand</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">Bestand</span>
+                        <span class="optiontooltip">Kunststofffenster Baualtersklasse 1984-1994</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -159,7 +197,10 @@
                         <input type="radio" name="Fenster2" value="2WSV">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>2WSV</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">2WSV</span>
+                        <span class="optiontooltip">Dena 2-Scheiben Wärmeschutzverglasung</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -170,7 +211,10 @@
                         <input type="radio" name="Fenster2" value="3WSV">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>3WSV</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">3WSV</span>
+                        <span class="optiontooltip">Dena 3-Scheiben Wärmeschutzverglasung</span>
+                    </div>
                 </div>
             </div>
 
@@ -182,44 +226,41 @@
                         <span class="checkmark"></span>
                     </label>
                     <label class="radiocontainer">
-                        <input type="radio" name="Waermedaemmung2" value="EPS">
+                        <input type="radio" name="Waermedaemmung2" value="EPS" checked>
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>EPS</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">EPS</span>
+                        <span class="optiontooltip">Expandiertes Polystyrol λ=0,032 W/m(K)</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
                         <input type="radio" name="Waermedaemmung1" value="Holz">
                         <span class="checkmark"></span>
                     </label>
-                    <span class="checkmark"></span>
                     <label class="radiocontainer">
                         <input type="radio" name="Waermedaemmung2" value="Holz">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>Holz</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">Holz</span>
+                        <span class="optiontooltip">Holzfaserdämmplatten λ=0,043 W/m(K)</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
-                        <input type="radio" name="Waermedaemmung1" value="HF MW">
+                        <input type="radio" name="Waermedaemmung1" value="HFMW">
                         <span class="checkmark"></span>
                     </label>
                     <label class="radiocontainer">
-                        <input type="radio" name="Waermedaemmung2" value="HF MW">
+                        <input type="radio" name="Waermedaemmung2" value="HFMW">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>HF MW</label>
-                </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
-                        <input type="radio" name="Waermedaemmung1" value="HF Holz">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="radiocontainer">
-                        <input type="radio" name="Waermedaemmung2" value="HF Holz">
-                        <span class="checkmark alternative"></span>
-                    </label>
-                    <label>HF Holz</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">HF MW</span>
+                        <span class="optiontooltip">Hinterlüftete Fassade und Mineralwolle λ=0,032 W/m(K)</span>
+                    </div>
                 </div>
             </div>
 
@@ -231,10 +272,13 @@
                         <span class="checkmark"></span>
                     </label>
                     <label class="radiocontainer">
-                        <input type="radio" name="Waermebruecken2" value="0.1">
+                        <input type="radio" name="Waermebruecken2" value="0.1" checked>
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>0.1</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">0.1</span>
+                        <span class="optiontooltip">test</span>
+                    </div>
                 </div>
                 <div class="radiogroup2">
                     <label class="radiocontainer">
@@ -245,7 +289,10 @@
                         <input type="radio" name="Waermebruecken2" value="0.05">
                         <span class="checkmark alternative"></span>
                     </label>
-                    <label>0.05</label>
+                    <div class="stelloption">
+                        <span class="optionlabel">0.05</span>
+                        <span class="optiontooltip">test</span>
+                    </div>
                 </div>
             </div>
         </div>
