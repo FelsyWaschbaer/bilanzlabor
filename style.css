@@ -7,55 +7,55 @@ body {
 h4 {
   color: red;
 }
-.legende{
+.ds456legende{
   margin-right: 20px;
 }
 
-#wrapper{
+#ds456wrapper{
   display: flex;
   flex-direction: row;
 }
 
-#mainContent{
+#ds456mainContent{
   padding: 80px 50px;
 }
 
-.legendeBox{
+.ds456legendeBox{
   width: 15px;
   height: 15px;
   float: left;
   margin: auto 5px;
 }
 
-#legendeContainer{
+#ds456legendeContainer{
   display: flex;
   flex-direction: row;
   margin-top: 25px;
 }
 
-#chartContainer{
+#ds456chartContainer{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
 
-.chart {
+.ds456chart {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.chart img {
+.ds456chart img {
   margin-left: 65px;
 }
 
-.radiogroup {
+.ds456radiogroup {
   display: inline-block;
   text-align: center;
   margin: 20px;
 }
 
-.filterSideBar{
+.ds456filterSideBar{
   width: 20%;
   min-width: 250px;
   background-color: white;
@@ -65,16 +65,16 @@ h4 {
   padding: 50px;
 }
 
-.filterBox{
+.ds456filterBox{
   margin: 10px auto;
 }
 
-.filterBox label{
+.ds456filterBox label{
   width: 200px;
   display: inline-block;
 }
 
-.radiogroup2 {
+.ds456radiogroup2 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,7 +82,7 @@ h4 {
   width: 90px;
 }
 
-.radiogroup2 label{
+.ds456radiogroup2 label{
   padding: 7px;
   text-align: center;
 }
@@ -90,33 +90,33 @@ h4 {
 .optionlabel{
   padding-bottom: 7px;
   text-align: center;
-  text-decoration: underline dotted;
+  text-decoration: underline;
 }
 
-.label-stellschraube{
+.ds456label-stellschraube{
   display: block;
   width: 120px;
   padding-top: 35px;
 }
 
-#stellschraubenContainer{
+#ds456stellschraubenContainer{
   display:flex;
   flex-flow: row wrap;
 }
 
-.stellschraube{
+.ds456stellschraube{
   display: flex;
   flex-direction: row;
   margin-right: 40px;
   height: 120px;
 }
 
-.radiogroup label {
+.ds456radiogroup label {
   display: block;
   padding: 5px;
 }
 
-.range-labels{
+.ds456range-labels{
   list-style: none;
   padding: 0;
 }
@@ -148,12 +148,12 @@ a {
   color: #00B7FF;
 }
 
-.tooltip{
+.ds456tooltip{
   background-color: white;
   border-style: solid;
   border-color: grey;
   border-radius: 5px;
-  border-width: 2px;
+  border-width: 1.5px;
   text-align: left;
   padding: 7px 7px;
   position: absolute;
@@ -161,17 +161,42 @@ a {
   min-width: 140px;
 }
 
-.tooltip_value{
+.ds456tooltip2{
+  background-color: white;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 5px;
+  border-width: 1.5px;
+  text-align: left;
+  padding: 7px 7px;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.ds456tooltip2Column{
+  display: flex;
+  flex-direction:column;
+}
+
+.ds456tooltip_value{
   float:right;
   margin-left: 20px;
 }
 
-.target {
+.ds456tooltip2_value{
+  white-space: nowrap;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.ds456target {
   font-weight:bold;
 }
 
 /* Customize the label (the container) */
-.radiocontainer {
+.ds456radiocontainer {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -185,7 +210,7 @@ a {
 }
 
 /* Hide the browser's default radio button */
-.radiocontainer input {
+.ds456radiocontainer input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -194,7 +219,7 @@ a {
 }
 
 /* Create a custom radio button */
-.checkmark {
+.ds456checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -205,28 +230,28 @@ a {
 }
 
 /* On mouse-over, add a grey background color */
-.radiocontainer:hover input ~ .checkmark {
+.ds456radiocontainer:hover input ~ .ds456checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.radiocontainer input:checked ~ .checkmark {
-  background-color: blueviolet;
+.ds456radiocontainer input:checked ~ .ds456checkmark {
+  background-color: dodgerblue;
 }
 
-.radiocontainer input:checked ~ .checkmark.alternative {
-  background-color: #ff0000;
+.ds456radiocontainer input:checked ~ .ds456checkmark.alternative {
+  background-color: firebrick;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
+.ds456checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
 /* Show the indicator (dot/circle) when checked */
-.radiocontainer input:checked ~ .checkmark:after {
+.ds456radiocontainer input:checked ~ .ds456checkmark:after {
   display: block;
 }
 
@@ -236,13 +261,6 @@ a {
   align-content: center;
   flex-direction: column;
 }
-
-/* Show the tooltip text when you mouse over the tooltip container */
-/*.stelloption:hover .optiontooltip {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: none;
-}*/
 
 /* Tooltip arrow */
 .stelloption .optiontooltip::after {
@@ -273,7 +291,7 @@ a {
   pointer-events: none;
 }
 
-#infocontainer{
+#ds456infocontainer{
   width: 100%;
   display: flex;
   position: fixed;
@@ -283,7 +301,7 @@ a {
   pointer-events: none;
 }
 
-#info{
+#ds456info{
   width: 350px;
   height: 60px;
   background-color: #2196F3;
@@ -293,13 +311,13 @@ a {
   visibility: hidden;
 }
 
-#loader{
+#ds456loader{
   width: 300px;
   height: 220px;
   padding-top: 80px;
 }
 
-#loader #spinner{
+#ds456loader #spinner{
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #3498db; /* Blue */
   border-radius: 50%;
@@ -313,15 +331,15 @@ a {
   100% { transform: rotate(360deg); }
 }
 
-.rect_herstellung, .rect_nutzung, .rect_rueckbau {
+.ds456rect_herstellung, .ds456rect_nutzung, .ds456rect_rueckbau {
   cursor: pointer;
 }
 
-.rect_nutzung:hover, .rect_herstellung:hover, .rect_rueckbau:hover {
+.ds456rect_nutzung:hover, .ds456rect_herstellung:hover, .ds456rect_rueckbau:hover {
   stroke: black;
 }
 
-.charttitle {
+.ds456charttitle {
   font-weight:bold;
   font-size: 23px;
   width: 200px;

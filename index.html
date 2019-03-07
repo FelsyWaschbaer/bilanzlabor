@@ -5,40 +5,40 @@
 </head>
 <body>
 
-<div id="infocontainer">
-    <div id="info"></div>
+<div id="ds456infocontainer">
+    <div id="ds456info"></div>
 </div>
 
-<div id="wrapper">
+<div id="ds456wrapper">
 
-    <div class="filterSideBar">
+    <div class="ds456filterSideBar">
         <h4>WIRKUNGSKATEGORIEN</h4>
 
-        <div class="filterBox">
+        <div class="ds456filterBox">
             <label>GWP - Treibhauspotential</label>
             <input type="checkbox" name="wk" value="gwp" checked>
         </div>
-        <div class="filterBox">
+        <div class="ds456filterBox">
             <label>PENRT - n. em. Primärenergie</label>
             <input type="checkbox" name="wk" value="penrt" checked>
         </div>
-        <div class="filterBox">
+        <div class="ds456filterBox">
             <label>AP - Versauerungspotential</label>
             <input type="checkbox" name="wk" value="ap">
         </div>
-        <div class="filterBox">
+        <div class="ds456filterBox">
             <label>ODP - Ozonabbaupotential</label>
             <input type="checkbox" name="wk" value="odp">
         </div>
 
         <h4>Diagrammtyp</h4>
 
-        <div class="filterBox">
+        <div class="ds456filterBox">
             <label>Balken</label>
             <input type="radio" name="charttype" value="barchart" checked>
         </div>
 
-        <div class="filterBox">
+        <div class="ds456filterBox">
             <label>Linien</label>
             <input type="radio" name="charttype" value="linechart">
         </div>
@@ -46,20 +46,20 @@
 
     </div>
 
-    <div id="mainContent">
-        <div id="chartContainer"> <div id="loader"><div id="spinner"></div> </div></div>
+    <div id="ds456mainContent">
+        <div id="ds456chartContainer"> <div id="ds456loader"><div id="spinner"></div> </div></div>
 
-        <div id="legendeContainer">
-            <div class="legende">
-                <div class="legendeBox" style="background-color:lightblue;"></div>
+        <div id="ds456legendeContainer">
+            <div class="ds456legende">
+                <div class="ds456legendeBox" style="background-color:lightblue;"></div>
                 Herstellung
             </div>
-            <div class="legende">
-                <div class="legendeBox" style="background-color:orange;"></div>
+            <div class="ds456legende">
+                <div class="ds456legendeBox" style="background-color:orange;"></div>
                 Nutzung
             </div>
-            <div class="legende">
-                <div class="legendeBox" style="background-color:grey;"></div>
+            <div class="ds456legende">
+                <div class="ds456legendeBox" style="background-color:grey;"></div>
                 Rückbau
             </div>
             <span>Bilanzierungszeitraum - 30 Jahre / Bezugsgröße - Gebäude</span>
@@ -68,56 +68,56 @@
         <hr/>
 
         <h4>STELLSCHRAUBEN</h4>
-        <!--<div class="range">
+        <!--<div class="ds456range">
             <figure>
                 <label for="energieStandard">Energiestandard</label>
-                <input id="energieStandard" type="range" min="0" max="2" step="1" style="width:300px;">
-                <ul class="range-labels" style="margin-left:100px">
+                <input id="ds456energieStandard" type="range" min="0" max="2" step="1" style="width:300px;">
+                <ul class="ds456range-labels" style="margin-left:100px">
                     <li>EnEV 2016
                     <li>KfW 70
                     <li>KfW 55
                 </ul>
             </figure>-->
 
-        <div id="stellschraubenContainer">
-            <div class="stellschraube">
-                <label class="label-stellschraube">Energiestandard</label>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+        <div id="ds456stellschraubenContainer">
+            <div class="ds456stellschraube">
+                <label class="ds456label-stellschraube">Energiestandard</label>
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Standard1" value="EnEV'16" checked>
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Standard2" value="EnEV'16" checked>
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">EnEV 2016</span>
                         <span class="optiontooltip">Energieeinsparverordnung 2016</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Standard1" value="KfW70">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Standard2" value="KfW70">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">KfW 70</span>
                         <span class="optiontooltip">test</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Standard1" value="KfW55">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Standard2" value="KfW55">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">KfW 55</span>
@@ -126,44 +126,44 @@
                 </div>
             </div>
 
-            <div class="stellschraube">
-                <label class="label-stellschraube">TGA</label>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+            <div class="ds456stellschraube">
+                <label class="ds456label-stellschraube">TGA</label>
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="TGA1" value="Gas" checked>
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="TGA2" value="Gas" checked>
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">Gas</span>
                         <span class="optiontooltip">Gasbrennwertkessel und neue Radiatoren</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="TGA1" value="WP">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="TGA2" value="WP">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">WP</span>
                         <span class="optiontooltip">Wärmepumpe Luft/Wasser und Fußbodenheizung</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="TGA1" value="Pellets">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="TGA2" value="Pellets">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">Holz</span>
@@ -172,44 +172,44 @@
                 </div>
             </div>
 
-            <div class="stellschraube">
-                <label class="label-stellschraube">Fenster</label>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+            <div class="ds456stellschraube">
+                <label class="ds456label-stellschraube">Fenster</label>
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Fenster1" value="FB" checked>
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Fenster2" value="FB" checked>
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">Bestand</span>
                         <span class="optiontooltip">Kunststofffenster Baualtersklasse 1984-1994</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Fenster1" value="2WSV">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Fenster2" value="2WSV">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">2WSV</span>
                         <span class="optiontooltip">Dena 2-Scheiben Wärmeschutzverglasung</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Fenster1" value="3WSV">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Fenster2" value="3WSV">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">3WSV</span>
@@ -218,44 +218,44 @@
                 </div>
             </div>
 
-            <div class="stellschraube">
-                <label class="label-stellschraube">Wärmedämmung</label>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+            <div class="ds456stellschraube">
+                <label class="ds456label-stellschraube">Wärmedämmung</label>
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermedaemmung1" value="EPS" checked>
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermedaemmung2" value="EPS" checked>
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">EPS</span>
                         <span class="optiontooltip">Expandiertes Polystyrol λ=0,032 W/m(K)</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermedaemmung1" value="Holz">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermedaemmung2" value="Holz">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">Holz</span>
                         <span class="optiontooltip">Holzfaserdämmplatten λ=0,043 W/m(K)</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermedaemmung1" value="HFMW">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermedaemmung2" value="HFMW">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">HF MW</span>
@@ -264,30 +264,30 @@
                 </div>
             </div>
 
-            <div class="stellschraube">
-                <label class="label-stellschraube">Wärmebrücken</label>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+            <div class="ds456stellschraube">
+                <label class="ds456label-stellschraube">Wärmebrücken</label>
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermebruecken1" value="0.1" checked>
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermebruecken2" value="0.1" checked>
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">0.1</span>
                         <span class="optiontooltip">test</span>
                     </div>
                 </div>
-                <div class="radiogroup2">
-                    <label class="radiocontainer">
+                <div class="ds456radiogroup2">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermebruecken1" value="0.05">
-                        <span class="checkmark"></span>
+                        <span class="ds456checkmark"></span>
                     </label>
-                    <label class="radiocontainer">
+                    <label class="ds456radiocontainer">
                         <input type="radio" name="Waermebruecken2" value="0.05">
-                        <span class="checkmark alternative"></span>
+                        <span class="ds456checkmark alternative"></span>
                     </label>
                     <div class="stelloption">
                         <span class="optionlabel">0.05</span>

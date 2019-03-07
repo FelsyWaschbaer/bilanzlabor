@@ -13,7 +13,7 @@ var stellschrauben = {
     waermebruecken: {options: ["0.1", "0.05"]}
 };
 
-var colors = ["lightblue", "red"];
+var colors = ["dodgerblue", "firebrick"];
 
 var format = function(value){return d3.format(",")(value).replace(/,/g, ' ').replace(/\./, ',')}
 
@@ -95,11 +95,11 @@ client2.addEventListener("load", function() {
     Object.keys(lineChartMap).forEach(function(key) {
        data.push(lineChartMap[key]);
     });
-    var chartContainer = document.getElementById("chartContainer");
-    var id = "chart" + "penrt";
+    var chartContainer = document.getElementById("ds456chartContainer");
+    var id = "ds456chart" + "penrt";
     var container = document.createElement("div");
     container.setAttribute("id", id);
-    container.setAttribute("class", "chart");
+    container.setAttribute("class", "ds456chart");
     chartContainer.appendChild(container);
     remainingAsyncCalls--;
     if(remainingAsyncCalls == 0){
@@ -111,7 +111,7 @@ client.send();
 client2.send();
 
 function showDiagramms() {
-    document.getElementById("loader").style.display = "none";
+    document.getElementById("ds456loader").style.display = "none";
     onChartTypeChanged();
 }
 
@@ -123,7 +123,7 @@ function onChartTypeChanged() {
     });
     var chartType = getChartType();
     var opacity = chartType == "barchart" ? 1 : 0;
-    document.getElementById("legendeContainer").style.opacity = opacity;
+    document.getElementById("ds456legendeContainer").style.opacity = opacity;
     if(chartType !== "barchart") {
         document.querySelectorAll('input[name="wk"]').forEach(
             function (wk){
@@ -152,32 +152,32 @@ function onWirkungskategorienChanged() {
     var key2 = getKey(2);
     var variante1 = dataSource[key1] != undefined ? dataSource[key1] : defaultVariante;
     var variante2 = dataSource[key2] != undefined ? dataSource[key2] : defaultVariante;
-    var chartContainer = document.getElementById("chartContainer");
+    var chartContainer = document.getElementById("ds456chartContainer");
     var chartIds = getPresentChartIds();
     var charts = [];
     wks.forEach(function (wk, index) {
-        if (!(chartIds.includes("chart" + wk))) {
-            var id = "chart" + wk;
+        if (!(chartIds.includes("ds456chart" + wk))) {
+            var id = "ds456chart" + wk;
             var container = document.createElement("div");
             container.setAttribute("id", id);
-            container.setAttribute("class", "chart");
+            container.setAttribute("class", "ds456chart");
             chartContainer.appendChild(container);
             if(chartType == "barchart"){
                 charts.push(new BarChart([variante1, variante2], id, wk, kategorien[wk].title, kategorien[wk].unit));
             }else{
-                charts.push(new LineChart([variante1, variante2], id, wk, kategorien[wk].title));
+                charts.push(new LineChart([variante1, variante2], id, wk, kategorien[wk].title, kategorien[wk].unit));
             }
 
         }
     });
     var deletedElements = chartIds.filter(function (id) {
-        return !(wks.includes(id.slice(5)));
+        return !(wks.includes(id.slice(10)));
     });
     deletedElements.forEach(function (id) {
         var element = document.getElementById(id);
         element.parentNode.removeChild(element);
     });
-    document.querySelectorAll('.radiogroup2 input').forEach(
+    document.querySelectorAll('.ds456radiogroup2 input').forEach(
         function (radiobutton) {
             radiobutton.addEventListener("click", function () {
                 onSelected(charts);
@@ -188,7 +188,7 @@ function onWirkungskategorienChanged() {
 
 function getPresentChartIds() {
     result = [];
-    document.querySelectorAll(".chart").forEach(
+    document.querySelectorAll(".ds456chart").forEach(
         function (chart) {
             result.push(chart.id);
         }
@@ -275,7 +275,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
     document.getElementById(containerId).appendChild(img);*/
 
     var charTitle = document.createElement("span");
-    charTitle.setAttribute("class", "charttitle");
+    charTitle.setAttribute("class", "ds456charttitle");
     charTitle.innerHTML = title;
     document.getElementById(containerId).appendChild(charTitle);
 
@@ -287,18 +287,18 @@ function BarChart(data, containerId, kategorie, title, unit) {
     //add axis
     svg.append("g")
         .attr("transform", "translate(" + marginLeft + ", " + 0 + ")")
-        .attr("id", "axis" + containerId).style("font-size", "13px");
+        .attr("id", "ds456axis" + containerId).style("font-size", "13px");
 
     svg.append("text").text("[" + unit + "]").attr("transform", "translate(" + (width-20) + ", 80) rotate(90)");
 
     svg.append("circle")
         .attr("r", 5)
-        .attr("fill", "blue")
+        .attr("fill", colors[0])
         .attr("cx", marginLeft + barMarginLeft + barWidth / 2)
         .attr("cy", height - 10);
     svg.append("circle")
         .attr("r", 5)
-        .attr("fill", "red")
+        .attr("fill", colors[1])
         .attr("cx", marginLeft + barMarginLeft + barDistance + 1.5 * barWidth)
         .attr("cy", height - 10);
 
@@ -333,10 +333,10 @@ function BarChart(data, containerId, kategorie, title, unit) {
         //create axis and set tick-format
         var axis = d3.axisLeft(scale).ticks(5).tickFormat(format);
 
-        d3.select("#axis" + containerId).call(axis);
+        d3.select("#ds456axis" + containerId).call(axis);
 
         //bind data
-        var varianten = svg.selectAll(".variante")
+        var varianten = svg.selectAll(".ds456variante")
             .data(workingData, function (d) {
                 return d.name
             });
@@ -351,12 +351,12 @@ function BarChart(data, containerId, kategorie, title, unit) {
         //add groups for varianten
         var new_varianten = varianten.enter()
             .append("g")
-            .attr("class", "variante")
+            .attr("class", "ds456variante")
             .attr("kategorie", kategorie);
 
-        new_varianten.append("rect").attr("class", "rect_herstellung");
-        new_varianten.append("rect").attr("class", "rect_nutzung");
-        new_varianten.append("rect").attr("class", "rect_rueckbau").on("click",function(){update(data, "rueckbau")});;
+        new_varianten.append("rect").attr("class", "ds456rect_herstellung");
+        new_varianten.append("rect").attr("class", "ds456rect_nutzung");
+        new_varianten.append("rect").attr("class", "ds456rect_rueckbau").on("click",function(){update(data, "rueckbau")});;
 
         //update (all)
         //--------------------------------------------------------------------
@@ -368,7 +368,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
             }
         }
 
-        new_varianten.merge(varianten).select(".rect_herstellung")
+        new_varianten.merge(varianten).select(".ds456rect_herstellung")
             .attr("width", barWidth)
             .attr("transform", function (d, i) {
                 var x = marginLeft + barMarginLeft + i * (barWidth + barDistance);
@@ -383,7 +383,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
             }).on("click",cyclePhase == "herstellung" ? function(){update(data, "all")} : function(){update(data, "herstellung")});
 
 
-        new_varianten.merge(varianten).select(".rect_nutzung")
+        new_varianten.merge(varianten).select(".ds456rect_nutzung")
             .attr("width", barWidth)
             .style("fill", function (d) {
                 return "orange";
@@ -406,7 +406,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
                 return scale(0) - scale(Math.abs(d[kategorie].nutzung))
             }).on("click",cyclePhase == "nutzung" ? function(){update(data, "all")} : function(){update(data, "nutzung")});
 
-        new_varianten.merge(varianten).select(".rect_rueckbau")
+        new_varianten.merge(varianten).select(".ds456rect_rueckbau")
             .attr("width", barWidth)
             .attr("height", function (d) {
                 return scale(0) - scale(Math.abs(d[kategorie].rueckbau))
@@ -437,7 +437,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
 
         //create zero line
         svg.append('line')
-            .attr("id", "zeroline")
+            .attr("id", "ds456zeroline")
             .attr("stroke-width", 1)
             .attr("stroke", "grey")
             .attr('y1', scale(0))
@@ -445,7 +445,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
             .attr('x1', marginLeft)
             .attr('x2', width);
 
-        addTooltips(d3.selectAll(".variante"))
+        addTooltips(d3.selectAll(".ds456variante"))
     };
 
     this.update(data, "all");
@@ -455,22 +455,22 @@ function setTooltipContent(div, data, event) {
     var herstellung = data.herstellung;
     var nutzung = data.nutzung;
     var rueckbau = data.rueckbau;
-    var target = event.originalTarget.attributes.class.value;
+    var target = event.srcElement.classList[0];
     div.html(
-        "<span class='" + (target == "rect_herstellung" ? "target" : target) + "'><span>Herstellung:</span><span class='tooltip_value'>" + format(data.herstellung) + "</span></span></br>" +
-        "<span class='" + (target == "rect_nutzung" ? "target" : target) + "'><span>Nutzung:</span><span class='tooltip_value'" + ">" + format(data.nutzung) + "</span></span></br>" +
-        "<span class='" + (target == "rect_rueckbau" ? "target" : target) + "'><span>Rückbau:</span><span class='tooltip_value'>" + format(data.rueckbau) + "</span></span><hr>" +
-        "<span><span>Gesamt:</span><span class='tooltip_value'>" + format(herstellung + nutzung + rueckbau) + "</span></span>")
+        "<span class='" + (target == "ds456rect_herstellung" ? "ds456target" : target) + "'><span>Herstellung:</span><span class='ds456tooltip_value'>" + format(data.herstellung) + "</span></span></br>" +
+        "<span class='" + (target == "ds456rect_nutzung" ? "ds456target" : target) + "'><span>Nutzung:</span><span class='ds456tooltip_value'" + ">" + format(data.nutzung) + "</span></span></br>" +
+        "<span class='" + (target == "ds456rect_rueckbau" ? "ds456target" : target) + "'><span>Rückbau:</span><span class='ds456tooltip_value'>" + format(data.rueckbau) + "</span></span><hr>" +
+        "<span><span>Gesamt:</span><span class='ds456tooltip_value'>" + format(herstellung + nutzung + rueckbau) + "</span></span>")
 }
 
 function addTooltips(varianten) {
 
-    var div = d3.select("body .tooltip");
+    var div = d3.select("body .ds456tooltip");
 
     //add tooltip (one for all)
     if (div.empty()) {
         div = d3.select("body").append("div")
-            .attr("class", "tooltip")
+            .attr("class", "ds456tooltip")
             .style("opacity", 0);
     }
 
@@ -500,7 +500,7 @@ function setTooltipPosition(div, event) {
     div.style("left", event.pageX + 10 + "px").style("top", event.pageY + 10 + "px");
 }
 
-function LineChart(data, containerId, kategorie, title) {
+function LineChart(data, containerId, kategorie, title, unit) {
     var width = 500;
     var height = 300;
     var marginLeft = 90;
@@ -509,8 +509,8 @@ function LineChart(data, containerId, kategorie, title) {
     var barDistance = 10;
 
     var charTitle = document.createElement("span");
-    charTitle.setAttribute("class", "charttitle");
-    charTitle.innerHTML = title;
+    charTitle.setAttribute("class", "ds456charttitle");
+    charTitle.innerHTML = title + "<span style='font-size:10px'>[" + unit +"]</span>";
     document.getElementById(containerId).appendChild(charTitle);
 
     //create svg
@@ -521,11 +521,11 @@ function LineChart(data, containerId, kategorie, title) {
     //add axis
     svg.append("g")
         .attr("transform", "translate(" + marginLeft + ", " + 0 + ")")
-        .attr("id", "yAxis" + containerId).style("font-size", "13px");;
+        .attr("id", "ds456yAxis" + containerId).style("font-size", "13px");;
 
     svg.append("g")
         .attr("transform", "translate(0, " + (height - marginBottom) + ")")
-        .attr("id", "xAxis" + containerId);
+        .attr("id", "ds456xAxis" + containerId);
 
     this.update = function update(data) {
 
@@ -543,17 +543,17 @@ function LineChart(data, containerId, kategorie, title) {
 
         //create axis and set tick-format
         var yAxis = d3.axisLeft(yScale).tickFormat(format);
-        d3.select("#yAxis" + containerId).call(yAxis);
+        d3.select("#ds456yAxis" + containerId).call(yAxis);
 
         var xScale = d3.scaleLinear().domain([2017, 2047]).range([marginLeft, width-5]);
 
         svg.selectAll(".lineChartPoint").remove();
         //create axis and set tick-format
         var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
-        d3.select("#xAxis" + containerId).call(xAxis);
+        d3.select("#ds456xAxis" + containerId).call(xAxis);
 
         //bind data
-        var varianten = svg.selectAll(".variante")
+        var varianten = svg.selectAll(".ds456variante")
             .data(data, function (d) {
                 return d.name
             });
@@ -568,21 +568,21 @@ function LineChart(data, containerId, kategorie, title) {
         //add groups for varianten
         var new_varianten = varianten.enter()
             .append("g")
-            .attr("class", "variante")
+            .attr("class", "ds456variante")
             .attr("kategorie", kategorie);
 
-        new_varianten.append("path").attr("class", "verlauf");
+        new_varianten.append("path").attr("class", "ds456verlauf");
 
         var line = d3.line()
             .x(function(d) { return xScale(d['x']); })
             .y(function(d) { return yScale(d['y']); });
 
-        new_varianten.merge(varianten).select(".verlauf")
+        new_varianten.merge(varianten).select(".ds456verlauf")
             .attr("d", function(d,i) {
                 var parent = d3.select(this.parentNode);
                 d[kategorie].forEach(function(p){
                     parent.append("circle")
-                        .attr("class","lineChartPoint")
+                        .attr("class","ds456lineChartPoint")
                         .attr("jahr", p['x'])
                         .attr("wert", p['y'])
                         .attr("cx", xScale(p['x']))
@@ -594,7 +594,7 @@ function LineChart(data, containerId, kategorie, title) {
             .attr("stroke", function(d,i){ return colors[i]})
             .attr("stroke-width", 3);
 
-        addLineChartTooltips(d3.selectAll(".lineChartPoint"))
+        addLineChartTooltips(d3.selectAll(".ds456lineChartPoint"))
 
     };
     this.update(data);
@@ -603,30 +603,28 @@ function LineChart(data, containerId, kategorie, title) {
 
 function addLineChartTooltips(points) {
 
-    var div = d3.select("body .tooltip");
+    var div = d3.select("body .ds456tooltip2");
 
     //add tooltip (one for all)
     if (div.empty()) {
         div = d3.select("body").append("div")
-            .attr("class", "tooltip")
+            .attr("class", "ds456tooltip2")
             .style("opacity", 0);
     }
 
     var body_padding = parseFloat(d3.select("body").style("padding-left"));
 
     points.on("mouseover", function (d, index, array) {
-        div.html("Jahr:" + array[index].attributes.jahr.value + "</br>" +
-            "Wert:" + format(Math.round(array[index].attributes.wert.value)))
+        div.html("<div class='ds456tooltip2Column'><span>Jahr:</span><span>Wert:</span></div>" +
+            "<div class='ds456tooltip2Column'><span class='ds456tooltip2_value'>" + array[index].attributes.jahr.value + "</span>" +
+            "<span class='ds456tooltip2_value'>" + format(Math.round(array[index].attributes.wert.value)) + "</span>" +
+            "</div>")
             .style("left", d3.event.pageX + 10 + "px")
             .style("top", d3.event.pageY + 10 + "px");
         //make tooltip appear
         div.transition()
             .duration(300)
             .style("opacity", 1);
-
-        varianten.on("mousemove", function(d){
-            div.style("left", d3.event.pageX + 10 + "px").style("top", d3.event.pageY + 10 + "px");
-        });
 
     }).on("mouseout", function (d) {
         //make tooltip disappear
@@ -637,7 +635,7 @@ function addLineChartTooltips(points) {
 }
 
 function showInfo(text,color) {
-    var info = document.getElementById("info");
+    var info = document.getElementById("ds456info");
     info.innerHTML = text;
     info.style.visibility = "visible";
     info.style.backgroundColor = color;
