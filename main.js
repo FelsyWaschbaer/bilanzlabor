@@ -6,7 +6,7 @@ var kategorien = {
     odp: {title: "ODP", unit:"kg CFC11-Eq"}
 };
 var stellschrauben = {
-    energiestandard: {options: ["EnEV'16", "KfW70", "KfW55"]},
+    energiestandard: {options: ["EnEV2016", "KfW70", "KfW55"]},
     tga: {options: ["Gas", "WP", "Pellets"]},
     fenster: {options: ["FB", "2WSV", "3WSV"]},
     waermedaemmung: {options: ["EPS", "Holz", "HFMW"]},
@@ -15,7 +15,7 @@ var stellschrauben = {
 
 var colors = ["dodgerblue", "firebrick"];
 
-var format = function(value){return d3.format(",")(value).replace(/,/g, ' ').replace(/\./, ',')}
+var format = function(value){return d3.format(",")(value).replace(/,/g, ' ').replace(/\./, ',')};
 
 
 
@@ -52,19 +52,20 @@ var resultMap = {};
 var lineChartMap = {};
 var client = new XMLHttpRequest();
 var client2 = new XMLHttpRequest();
-client.open('GET', "ecodata.txt");
-client2.open('GET', "lineChartData.txt");
+client.open('GET', "barChartData.CSV");
+client2.open('GET', "lineChartData.CSV");
 client.addEventListener("load", function () {
+    var yearsOfUse = 30;
     var lines = client.responseText.split("\n");
     lines.forEach(function (line) {
-        line = line.replace(",", ".");
+        // line = line.replace(",", ".");
         var columns = line.split(";");
         var name = columns[5];
         var variante = {name: name};
 
         for (var i = 0; i <= 11; i = i + 3) {
             var herstellung = parseFloat(columns[i + 6]);
-            var nutzung = parseFloat(columns[i + 7]);
+            var nutzung = parseFloat(columns[i + 7]) * yearsOfUse;
             var rueckbau = parseFloat(columns[i + 8]);
             var kategorie = {herstellung: herstellung, nutzung: nutzung, rueckbau: rueckbau};
             variante[Object.keys(kategorien)[i / 3]] = kategorie;
@@ -79,16 +80,18 @@ client.addEventListener("load", function () {
 
 client2.addEventListener("load", function() {
     var lines = client2.responseText.split("\n");
+    var rueckbau_bestand_gwp = lines[0].replace(",", ".").split(";")[1];
+    var rueckbau_bestand_penrt = lines[0].replace(",", ".").split(";")[2];
     lines.forEach(function (line) {
         line = line.replace(",", ".");
         var columns = line.split(";");
         var name = columns[0];
-        var p1_penrt = {x: 2017, y: parseFloat(columns[1])};
-        var p2_penrt = {x: 2046, y: parseFloat(columns[1]) + 29 * parseFloat(columns[2])};
-        var p3_penrt = {x: 2047, y: parseFloat(columns[3])};
-        var p1_gwp = {x: 2017, y: parseFloat(columns[4])};
-        var p2_gwp = {x: 2046, y: parseFloat(columns[4]) + 29 * parseFloat(columns[5])};
-        var p3_gwp = {x: 2047, y: parseFloat(columns[6])};
+        var p1_penrt = {x: 2017, y: parseFloat(columns[6])};
+        var p2_penrt = {x: 2047, y: parseFloat(columns[6]) + 30 * parseFloat(columns[7])};
+        var p3_penrt = {x: 2047.5, y: p2_penrt.y - parseFloat(rueckbau_bestand_penrt) - parseFloat(columns[8])};
+        var p1_gwp = {x: 2017, y: parseFloat(columns[3])};
+        var p2_gwp = {x: 2047, y: parseFloat(columns[3]) + 30 * parseFloat(columns[4])};
+        var p3_gwp = {x: 2047.5, y: p2_gwp.y + parseFloat(rueckbau_bestand_gwp) + parseFloat(columns[5]) };
         lineChartMap[name] = {name: name, penrt: [p1_penrt, p2_penrt, p3_penrt], gwp: [p1_gwp, p2_gwp, p3_gwp]};
     });
     var data = [];
@@ -245,7 +248,7 @@ function getKey(value) {
     var fenster = getRadioValue("Fenster" + value);
     var waermedaemmung = getRadioValue("Waermedaemmung" + value);
     var waermebruecken = getRadioValue("Waermebruecken" + value);
-    if (standard !== "EnEV'16" && fenster !== "3WSV") {
+    if (standard !== "EnEv2016" && fenster !== "3WSV") {
         showInfo("Der Energiestandard ist nur mit mehrfach verglasten Fenstern zu erreichen", colors[value-1]);
     }
     return [standard, fenster, waermedaemmung, tga, waermebruecken].join("_");
@@ -276,7 +279,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
 
     var charTitle = document.createElement("span");
     charTitle.setAttribute("class", "ds456charttitle");
-    charTitle.innerHTML = title;
+    charTitle.innerHTML = title + "<span style='font-size:10px'>[" + unit +"]</span>";
     document.getElementById(containerId).appendChild(charTitle);
 
     //create svg
@@ -289,7 +292,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
         .attr("transform", "translate(" + marginLeft + ", " + 0 + ")")
         .attr("id", "ds456axis" + containerId).style("font-size", "13px");
 
-    svg.append("text").text("[" + unit + "]").attr("transform", "translate(" + (width-20) + ", 80) rotate(90)");
+    // svg.append("text").text("[" + unit + "]").attr("transform", "translate(" + (width-20) + ", 80) rotate(90)");
 
     svg.append("circle")
         .attr("r", 5)
@@ -433,7 +436,7 @@ function BarChart(data, containerId, kategorie, title, unit) {
             }).on("click",cyclePhase == "rueckbau" ? function(){update(data, "all")} : function(){update(data, "rueckbau")});
 
 
-        svg.select("#zeroline").remove();
+        svg.select("#ds456zeroline").remove();
 
         //create zero line
         svg.append('line')
@@ -457,10 +460,10 @@ function setTooltipContent(div, data, event) {
     var rueckbau = data.rueckbau;
     var target = event.srcElement.classList[0];
     div.html(
-        "<span class='" + (target == "ds456rect_herstellung" ? "ds456target" : target) + "'><span>Herstellung:</span><span class='ds456tooltip_value'>" + format(data.herstellung) + "</span></span></br>" +
-        "<span class='" + (target == "ds456rect_nutzung" ? "ds456target" : target) + "'><span>Nutzung:</span><span class='ds456tooltip_value'" + ">" + format(data.nutzung) + "</span></span></br>" +
-        "<span class='" + (target == "ds456rect_rueckbau" ? "ds456target" : target) + "'><span>Rückbau:</span><span class='ds456tooltip_value'>" + format(data.rueckbau) + "</span></span><hr>" +
-        "<span><span>Gesamt:</span><span class='ds456tooltip_value'>" + format(herstellung + nutzung + rueckbau) + "</span></span>")
+        "<span class='" + (target == "ds456rect_herstellung" ? "ds456target" : target) + "'><span>Herstellung:</span><span class='ds456tooltip_value'>" + format(Math.round(data.herstellung)) + "</span></span></br>" +
+        "<span class='" + (target == "ds456rect_nutzung" ? "ds456target" : target) + "'><span>Nutzung:</span><span class='ds456tooltip_value'" + ">" + format(Math.round(data.nutzung)) + "</span></span></br>" +
+        "<span class='" + (target == "ds456rect_rueckbau" ? "ds456target" : target) + "'><span>Rückbau:</span><span class='ds456tooltip_value'>" + format(Math.round(data.rueckbau)) + "</span></span><hr>" +
+        "<span><span>Gesamt:</span><span class='ds456tooltip_value'>" + format(Math.round(herstellung + nutzung + rueckbau)) + "</span></span>")
 }
 
 function addTooltips(varianten) {
@@ -545,9 +548,9 @@ function LineChart(data, containerId, kategorie, title, unit) {
         var yAxis = d3.axisLeft(yScale).tickFormat(format);
         d3.select("#ds456yAxis" + containerId).call(yAxis);
 
-        var xScale = d3.scaleLinear().domain([2017, 2047]).range([marginLeft, width-5]);
+        var xScale = d3.scaleLinear().domain([2017, 2049]).range([marginLeft, width-5]);
 
-        svg.selectAll(".lineChartPoint").remove();
+        svg.selectAll(".ds456lineChartPoint").remove();
         //create axis and set tick-format
         var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
         d3.select("#ds456xAxis" + containerId).call(xAxis);
