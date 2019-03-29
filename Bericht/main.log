@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.11)  28 MAR 2019 14:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.11)  29 MAR 2019 13:16
 entering extended mode
 **./main.tex
 (main.tex
@@ -2021,6 +2021,17 @@ Package babel Info: Redefining ngerman shorthand "~
 
 
 ]
+LaTeX Font Info:    Font shape `T1/pplx/m/sl' in size <10.95> not available
+(Font)              Font shape `T1/pplx/m/it' tried instead on input line 14.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 14.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 14.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 14.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 14.
+ [2]
 chapter 2.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 14.
@@ -2046,7 +2057,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 20.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 20.
-[2
+[3
 
 
 ]
@@ -2064,7 +2075,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 43.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 43.
- [3
+ [4
 
 
 ]
@@ -2086,7 +2097,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 44.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 44.
- [4
+ [5
 
 
 ]
@@ -2113,7 +2124,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 48.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 48.
-[5
+[6
 
 
 ]
@@ -2129,19 +2140,20 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 48127 strings out of 493333
- 1063769 string characters out of 3139191
- 1744249 words of memory out of 3000000
- 50930 multiletter control sequences out of 15000+200000
- 558215 words of font info for 77 fonts, out of 3000000 for 9000
+ 48199 strings out of 493333
+ 1064419 string characters out of 3139191
+ 1745249 words of memory out of 3000000
+ 50934 multiletter control sequences out of 15000+200000
+ 563568 words of font info for 126 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
- 77i,7n,128p,10458b,1702s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 77i,8n,128p,10458b,1702s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (7 pages, 57977 bytes).
+/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/pal
+atino/uplri8a.pfb>
+Output written on main.pdf (8 pages, 72146 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
- 20090 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 133 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
+ 26234 words of extra memory for PDF output out of 29859 (max. 10000000)
 
