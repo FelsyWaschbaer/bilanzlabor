@@ -10,18 +10,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.1}Datengrundlage (Masterarbeit T. Dzharov)}{2}{subsection.1.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}Ziel der Darstellung im Bilanzlabor}{2}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.2}Ziel der Darstellung im Bilanzlabor}{3}{subsection.1.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Umsetzung}{3}{chapter.2}
+\contentsline {chapter}{\numberline {2}Umsetzung}{4}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Datenaufbereitung}{3}{section.2.1}
+\contentsline {section}{\numberline {2.1}Datenaufbereitung}{4}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Architektur der Software}{3}{section.2.2}
+\contentsline {section}{\numberline {2.2}Architektur der Software}{4}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Integration in Liferay}{3}{section.2.3}
+\contentsline {section}{\numberline {2.3}Integration in Liferay}{4}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Anwenderdokumentation}{4}{chapter.3}
+\contentsline {chapter}{\numberline {3}Anwenderdokumentation}{5}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{5}{chapter*.2}
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{6}{chapter*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{6}{chapter*.3}
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{7}{chapter*.4}

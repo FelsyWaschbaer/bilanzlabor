@@ -6,9 +6,36 @@ Das Ziel dieses interdisziplinären Projektes der Fakultäten Informatik und Bau
 \section{Lehr- und Lernplattform Bilanzlabor}
 Das Bilanzlabor entstand Ende 2014 als Initiative des Zentrums für nachhaltiges Bauen, einem Zusammenschluss verschiedener Lehrstühle der Fakultäten Bau Geo Umwelt, Architektur sowie Elektro- und Informationstechnik. Die Idee war es, eine Plattform zu erstellen, die basierend auf dem Ansatz der forschungsorientierten Lehre Studierenden die Möglichkeit gibt, sich gesamtheitliche Kenntnisse in den Bereichen Nachhaltigkeit und Lebenszyklusanalyse anzueignen und darüber hinaus hilft die wissenschaftliche Zusammenarbeit der beteiligten Fakultäten auf diesen Gebieten zu stärken. Die Inhalte der Lernplattform sollten dabei sowohl von Seiten der Studierenden als auch von Forschern des Bereichs erstellt und bearbeitet werden können. Um dies zu ermöglichen, ist das Bilanzlabor als Internetseite realisiert, die das quelloffene Enterprise Portal „Liferay Portal“ verwendet. Dieses beinhaltet zum einen ein Content-Management-System zur Organisation von Inhalten, die gemeinschaftlich erstellt und bearbeitet werden können, und zum anderen verschiedene Groupware-Komponenten wie Wikis, Foren und Instant Messaging, welche die gemeinsame Zusammenarbeit unterstützen. Zudem gibt es ein System zur rollenbasierten Autorisierung, um Berechtigungen zu erteilen und zu verwalten. Studierende und Wissenschaftler können sich somit über ihre TUM-Kennung authentifizieren und anschließend je nach Berechtigung verschiedene Inhalte einsehen und/oder bearbeiten. Dies ist ohne Programmierkenntnisse der Benutzer möglich.
 \section{Vergleichende Ökobilanz verschiedener Sanierungsszenarien}
-
+Das hier beschriebene Projekt sollte einen Beitrag zum Bilanzlabor leisten, indem es dieses um eine interaktive Visualisierung einer vergleichenden Ökobilanz erweitert. 
 \subsection{Datengrundlage (Masterarbeit T. Dzharov)}
+Die Daten, die der Visualisierung zu Grunde liegen, stammen aus der Masterarbeit von T. Dzharov. Dort wurde untersucht, wie sich verschiedene Sanierungsszenarien auf die Ökobilanz eines Gebäudes auswirken. Bei dem betrachteten Wohngebäude handelte es sich um ein typisches Projekt aus der Nachkriegszeit (1958) mit ungedämmten Außenwänden sowie dezentralen Niedertemperatur-Gasheizkesseln für die Bereitstellung von Trinkwarmwasser und zur Deckung des Heizbedarfs. Die ehemaligen Fenster mit Holzrahmen waren bereits durch solche mit Kunststoffrahmen und 2-Scheiben-Isolierverglasung ersetzt worden. Die untersuchten Sanierungsvarianten unterschieden sich in Energiestandard, Fenstertyp, Außenwanddämmung, Wärmebrücken und Heizungstechnik. Die Optionen für diese Stellschrauben sind in Tabelle~\ref{tab:layers} aufgelistet. 
  
+\begin{table}[htpb]
+	\caption[Example table]{Stellschrauben der Gebäudesanierung}\label{tab:layers}
+	\centering
+	\begin{tabular}{l p{10cm}}
+		\toprule
+		Stellschraube & Optionen \\
+		\midrule
+		\multirow{3}{*}{Energiestandard} & EnEv 2016\\
+		& KfW70 \\
+		& KfW55\\ \hline
+	    \multirow{3}{*}{Fenstertyp} & Bestand\\
+		& Dena 2-Scheiben WSV \\
+		& Dena 3-Scheiben WSV\\ \hline
+	    \multirow{3}{*}{Außenwanddämmung} & EPS-Dämmung\\
+		& Holzfaserdämmung \\
+		& Hinterlüftete Fassade mit Mineralwolldämmung\\ \hline
+	    \multirow{2}{*}{Wärmebrücken} & Wärmebrückenkorrekturfaktor 0,1\\
+		& Wärmebrückenkorrekturfaktor 0,05 \\ \hline
+	    \multirow{3}{*}{Heizungstechnik} & ZH mit Gasbrennwertkessel und neuen Radiatoren\\
+		& ZH mit Wärmepumpe Luft/Wasser und Flächenheizung \\
+		& ZH mit Pelletkessel und neuen Radiatoren\\ \hline
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Test
 \subsection{Ziel der Darstellung im Bilanzlabor}
 
 \chapter{Umsetzung}
