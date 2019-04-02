@@ -2145,6 +2145,8 @@
     <bcf:datasource type="file" datatype="bibtex">bibliography.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1">milgram</bcf:citekey>
+    <bcf:citekey order="2">milgram</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

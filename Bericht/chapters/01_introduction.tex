@@ -20,15 +20,15 @@ Die Daten, die der Visualisierung zu Grunde liegen, stammen aus der Masterarbeit
 		\multirow{3}{*}{Energiestandard} & EnEv 2016\\
 		& KfW70 \\
 		& KfW55\\ \hline
-	    \multirow{3}{*}{Fenstertyp} & Bestand\\
+	    \multirow{3}{*}{Fenster} & Bestand\\
 		& Dena 2-Scheiben WSV \\
 		& Dena 3-Scheiben WSV\\ \hline
-	    \multirow{3}{*}{Außenwanddämmung} & EPS-Dämmung\\
+	    \multirow{3}{*}{Wärmedämmung} & EPS-Dämmung\\
 		& Holzfaserdämmung \\
 		& Hinterlüftete Fassade mit Mineralwolldämmung\\ \hline
 	    \multirow{2}{*}{Wärmebrücken} & Wärmebrückenkorrekturfaktor 0,1\\
 		& Wärmebrückenkorrekturfaktor 0,05 \\ \hline
-	    \multirow{3}{*}{Heizungstechnik} & Zentralheizung mit Gasbrennwertkessel und neuen Radiatoren\\
+	    \multirow{3}{*}{Heizungstechnik (TGA)} & Zentralheizung mit Gasbrennwertkessel und neuen Radiatoren\\
 		& Zentralheizung mit Wärmepumpe Luft/Wasser und Flächenheizung \\
 		& Zentralheizung mit Pelletkessel und neuen Radiatoren\\ \hline
 		\bottomrule
@@ -61,8 +61,31 @@ Für jede der aus der Kombination der verschiedenen Optionen entstehenden Sanier
 Die Ergebnisse der vergleichenden Ökobilanz sollten auf der Plattform „Bilanzlabor“ so präsentiert werden, dass Studierenden die Umweltauswirkungen verschiedener Sanierungsmaßnahmen deutlich wird. Trotz der Tatsache, dass es sich bei den erhobenen Daten um die eines spezifischen, wenn auch typischen Wohngebäude der Nachkriegszeit handelt,  sollten sich die qualitativen Resultate durchaus generalisieren lassen. Durch eine Beschränkung auf die Wirkungskategorien PENRT, GWP, AP und ODP, werden nur die eindrücklichsten Unterschiede dargestellt.
 
 \chapter{Umsetzung}
-
+Zur Realisierung des Projektes wurde zunächst, ausgehend von einem von T. Dzharov im Rahmen seiner Masterarbeit entwickelten Entwurfes, die Planung einer interaktiven Benutzeroberfläche durchgeführt. Nach der Analyse der vorhandenen Daten folgte die Konzeption einer geeigneten Programmarchitektur um die benötigten Informationen für die Visualisierung zur Verfügung zu stellen und eine Einbindung in die Plattform „Bilanzlabor“ zu ermöglichen.
 \section{Datenaufbereitung}
+Als Datenbasis stand pro Sanierungsvariante je eine mit dem Tabellenkalkulationsprogramm Excel erstellte Datei zur Verfügung, die die Berechnung der jeweiligen Ökobilanzierung enthielt. Die Dateinamen richteten sich nach den Ausprägungen der Sanierungsoptionen und weitestgehend im in Abbildung~\ref{fig:dateinamenschema} gezeigten Format angegeben. Da die Abkürzungen für die Optionen teilweise nicht einheitlich verwendet worden waren, bestand der erste Schritt der Datenaufbereitung darin, durch die Umbenennung der Dateien eine automatisierte Zuordnung zwischen einer Kombination von Sanierungsoptionen und der die betreffenden Daten enthaltenden Datei zu gewährleisten.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[height=30mm]{figures/dateiname.png}
+	\caption[Dateinamenschema]{Dateinamenschema (nach \autocite{milgram})}
+	\label{fig:dateinamenschema}	
+\end{figure}   
+Des Weiteren existierte eine Excel-Datei mit einer Tabelle in der die Ergebnisse der einzelnen Ökobilanzen zusammengefasst aufgeführt waren. Das Schema mit einigen Bespieldaten ist in Tabelle X zu sehen.
+\begin{table}[htpb]
+	\caption[Example table]{Schema der Tabelle des Sanierungsvariantenvergleichs }\label{tab:wirkungsindikatoren}
+	\centering
+	\begin{tabular}{l l l l}
+		\toprule
+		Variante & WK\textsuperscript{*}\_Herstellung & WK\textsuperscript{*}\_Nutzung & WK\textsuperscript{*}\_Rückbau \\
+		\midrule
+		EnEV'16\_FB\_EPS\_Pellets\_0.1 & 531429.68
+		 & 1670135.52 &
+		  -195844.54
+		  \\ \hline
+		\bottomrule
+	\end{tabular}
+\caption*{\textsuperscript{*} Diese Spalten existieren für jede der Wirkungskategorien PENRT, GWP, ADP und ODP}
+\end{table} 
 \section{Architektur der Software}
 \section{Integration in Liferay}
 
