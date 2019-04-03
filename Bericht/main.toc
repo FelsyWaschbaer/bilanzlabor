@@ -16,12 +16,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Datenaufbereitung}{4}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Architektur der Software}{5}{section.2.2}
+\contentsline {section}{\numberline {2.2}Architektur der Software}{6}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Integration in Liferay}{5}{section.2.3}
+\contentsline {section}{\numberline {2.3}Integration in Liferay}{6}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Anwenderdokumentation}{6}{chapter.3}
+\contentsline {chapter}{\numberline {3}Anwenderdokumentation}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{7}{chapter*.6}
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{8}{chapter*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{8}{chapter*.7}
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{9}{chapter*.7}
