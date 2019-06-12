@@ -52,8 +52,8 @@ var resultMap = {};
 var lineChartMap = {};
 var client = new XMLHttpRequest();
 var client2 = new XMLHttpRequest();
-client.open('GET', "barChartData.CSV");
-client2.open('GET', "lineChartData.CSV");
+client.open('GET', "barChartData2.CSV");
+client2.open('GET', "lineChartData2.CSV");
 client.addEventListener("load", function () {
     var yearsOfUse = 30;
     var lines = client.responseText.split("\n");
@@ -248,10 +248,11 @@ function getKey(value) {
     var fenster = getRadioValue("Fenster" + value);
     var waermedaemmung = getRadioValue("Waermedaemmung" + value);
     var waermebruecken = getRadioValue("Waermebruecken" + value);
+    var solarthermie = getRadioValue("Solarthermie" + value);
     if (standard !== "EnEv2016" && fenster !== "3WSV") {
         showInfo("Der Energiestandard ist nur mit mehrfach verglasten Fenstern zu erreichen", colors[value-1]);
     }
-    return [standard, fenster, waermedaemmung, tga, waermebruecken].join("_");
+    return solarthermie ? [standard, fenster, waermedaemmung, tga, waermebruecken, solarthermie].join("_") : [standard, fenster, waermedaemmung, tga, waermebruecken].join("_");
 }
 
 function posF(value) {
