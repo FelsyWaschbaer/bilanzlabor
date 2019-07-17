@@ -43,7 +43,7 @@ var lineChartMap = {};
 var client = new XMLHttpRequest();
 var client2 = new XMLHttpRequest();
 client.open('GET', "barChartData2.CSV");
-client2.open('GET', "lineChartData3.CSV");
+client2.open('GET', "LineChartData3.CSV");
 client.addEventListener("load", function () {
     var yearsOfUse = 30;
     var lines = client.responseText.split("\n");
@@ -70,8 +70,9 @@ client.addEventListener("load", function () {
 
 client2.addEventListener("load", function() {
     var lines = client2.responseText.split("\n");
-    var rueckbau_bestand_gwp = lines[0].replace(",", ".").split(";")[1];
-    var rueckbau_bestand_penrt = lines[0].replace(",", ".").split(";")[2];
+    var rueckbau_bestand_gwp = lines[0].replace(",", ".").split(";")[0];
+    var rueckbau_bestand_penrt = lines[0].replace(",", ".").split(";")[1];
+    var rueckbau_bestand_ap = lines[0].replace(",", ".").split(";")[2];
     lines.forEach(function (line) {
         line = line.replace(",", ".");
         var columns = line.split(";");
@@ -82,7 +83,14 @@ client2.addEventListener("load", function() {
         var p1_gwp = {x: 2017, y: parseFloat(columns[3])};
         var p2_gwp = {x: 2047, y: parseFloat(columns[3]) + 30 * parseFloat(columns[4])};
         var p3_gwp = {x: 2047.5, y: p2_gwp.y + parseFloat(rueckbau_bestand_gwp) + parseFloat(columns[5]) };
-        lineChartMap[name] = {name: name, penrt: [p1_penrt, p2_penrt, p3_penrt], gwp: [p1_gwp, p2_gwp, p3_gwp]};
+        var p1_ap = {x: 2017, y: parseFloat(columns[9])};
+        var p2_ap = {x: 2047, y: parseFloat(columns[9]) + 30 * parseFloat(columns[10])};
+        var p3_ap = {x: 2047.5, y: p2_ap.y + parseFloat(rueckbau_bestand_ap) + parseFloat(columns[11]) };
+        lineChartMap[name] = {name: name, 
+            penrt: [p1_penrt, p2_penrt, p3_penrt], 
+            gwp: [p1_gwp, p2_gwp, p3_gwp],
+            ap: [p1_ap, p2_ap, p3_ap]
+        };
     });
     var data = [];
     Object.keys(lineChartMap).forEach(function(key) {
