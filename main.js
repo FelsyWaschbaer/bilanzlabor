@@ -43,7 +43,7 @@ var lineChartMap = {};
 var client = new XMLHttpRequest();
 var client2 = new XMLHttpRequest();
 client.open('GET', "barChartData2.CSV");
-client2.open('GET', "lineChartData2.CSV");
+client2.open('GET', "lineChartData3.CSV");
 client.addEventListener("load", function () {
     var yearsOfUse = 30;
     var lines = client.responseText.split("\n");
@@ -120,7 +120,7 @@ function onChartTypeChanged() {
     if(chartType !== "barchart") {
         document.querySelectorAll('input[name="wk"]').forEach(
             function (wk){
-                if(wk.value !== "gwp" && wk.value !== "penrt") {
+                if(wk.value !== "gwp" && wk.value !== "penrt" && wk.value !== "ap") {
                     wk.checked = false;
                     wk.disabled = true;
                 }
