@@ -43,7 +43,7 @@ var lineChartMap = {};
 var client = new XMLHttpRequest();
 var client2 = new XMLHttpRequest();
 client.open('GET', "barChartData2.CSV");
-client2.open('GET', "LineChartData3.CSV");
+client2.open('GET', "lineChartData3.CSV");
 client.addEventListener("load", function () {
     var yearsOfUse = 30;
     var lines = client.responseText.split("\n");
