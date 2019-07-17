@@ -2,22 +2,12 @@ var rawData = null;
 var kategorien = {
     penrt: {title: "PENRT", unit: "TJ"},
     gwp: {title: "GWP", unit: "t CO2-Eq"},
-    ap: {title: "AP", unit: "kg SO2-Eq"},
-    odp: {title: "ODP", unit:"kg CFC11-Eq"}
-};
-var stellschrauben = {
-    energiestandard: {options: ["EnEV2016", "KfW70", "KfW55"]},
-    tga: {options: ["Gas", "WP", "Pellets"]},
-    fenster: {options: ["FB", "2WSV", "3WSV"]},
-    waermedaemmung: {options: ["EPS", "Holz", "HFMW"]},
-    waermebruecken: {options: ["0.1", "0.05"]}
+    ap: {title: "AP", unit: "kg SO2-Eq"}
 };
 
 var colors = ["dodgerblue", "firebrick"];
 
 var format = function(value){return d3.format(",")(value).replace(/,/g, ' ').replace(/\./, ',')};
-
-
 
 document.querySelectorAll('.optionlabel').forEach(
     function(label){
