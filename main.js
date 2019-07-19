@@ -248,7 +248,7 @@ function getKey(value) {
     var waermebruecken = getRadioValue("Waermebruecken" + value);
     var solarthermie = getRadioValue("Solarthermie" + value);
     if (standard !== "EnEv2016" && fenster !== "3WSV") {
-        showInfo("Der Energiestandard ist nur mit mehrfach verglasten Fenstern zu erreichen", colors[value-1]);
+        showInfo("Der Energiestandard ist nur mit dreifach verglasten Fenstern zu erreichen", colors[value-1]);
     }
     return solarthermie ? [standard, fenster, waermedaemmung, tga, waermebruecken, solarthermie].join("_") : [standard, fenster, waermedaemmung, tga, waermebruecken].join("_");
 }
